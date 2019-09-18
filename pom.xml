@@ -72,6 +72,9 @@
 
 <!--	JUnit-->
 		<junit-jupiter.version>5.5.2</junit-jupiter.version>
+
+		<!-- NB: Deploy releases to the SciJava Maven repository. -->
+		<releaseProfiles>deploy-to-scijava</releaseProfiles>
 	</properties>
 
 	<developers>
