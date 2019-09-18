@@ -29,13 +29,13 @@ internal class K5Test {
         val container = directory.resolve(N5_CONTAINER)
         Assert.assertFalse(container.exists())
         with (K5) {
-            container.absolutePath.n5fsWriter().let {
+            container.absolutePath.n5fsWriter.let {
                 it.createGroup(TEST_GROUP)
                 it.setAttribute(TEST_GROUP, TEST_ATTRIBUTE, TEST_VALUE)
                 Assert.assertTrue(container.exists())
                 Assert.assertTrue(container.isDirectory)
             }
-            container.absolutePath.n5fsReader().let {
+            container.absolutePath.n5fsReader.let {
                 Assert.assertTrue(it.exists(TEST_GROUP))
                 Assert.assertTrue(TEST_ATTRIBUTE in it.listAttributes(TEST_GROUP))
                 Assert.assertEquals(TEST_VALUE, it.getAttribute(TEST_GROUP, TEST_ATTRIBUTE, TEST_VALUE::class.java))
@@ -48,13 +48,13 @@ internal class K5Test {
         val container = directory.resolve(HDF_CONTAINER)
         Assert.assertFalse(container.exists())
         with (K5) {
-            container.absolutePath.hdf5Writer().use {
+            container.absolutePath.hdf5Writer.use {
                 it.createGroup(TEST_GROUP)
                 it.setAttribute(TEST_GROUP, TEST_ATTRIBUTE, TEST_VALUE)
                 Assert.assertTrue(container.exists())
                 Assert.assertTrue(container.isFile)
             }
-            container.absolutePath.hdf5Reader().use {
+            container.absolutePath.hdf5Reader.use {
                 Assert.assertTrue(it.exists(TEST_GROUP))
                 Assert.assertTrue(TEST_ATTRIBUTE in it.listAttributes(TEST_GROUP))
                 Assert.assertEquals(TEST_VALUE, it.getAttribute(TEST_GROUP, TEST_ATTRIBUTE, TEST_VALUE::class.java))
